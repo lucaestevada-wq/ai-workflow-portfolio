@@ -25,9 +25,14 @@ Production Discord bot delivering AI-powered art critique grounded in a 300+ boo
 ### 3. Remotion Motion Graphics Pipeline *(coming soon)*
 Code-based motion graphics using React/Remotion. Programmatic animation, brand-consistent asset generation.
 
+### 4. [n8n Fundamentals Workflows](./n8n-workflows/)
+Four importable workflows: webhook in/out, HTTP GET and POST, JSON lists, and a capstone that takes a POSTed name, calls a weather API and replies with a personalised sentence. Self-hosted n8n in Docker, no credentials.
+
+**Proves**: n8n core nodes, webhooks, REST calls, JSON and expressions. Fundamentals only, error handling and LLM steps come next.
+
 ---
 
 ## In Progress
-- n8n automation workflows (Phase 1)
+- n8n automation workflows (Phase 1): fundamentals done, Gmail triage with LLM next
 - Content repurposing pipeline: video → transcript → shorts (Phase 2)
 - Business ops automation: email triage → CRM → human review loop (Phase 3)

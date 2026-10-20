@@ -1,0 +1,93 @@
+{
+  "name": "test 3 JSON boxes",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -176,
+        -16
+      ],
+      "id": "071593bb-5202-4c28-9fa0-838cf0291d8c",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://jsonplaceholder.typicode.com/users",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        48,
+        -16
+      ],
+      "id": "cb63d81a-254d-4a03-b69a-0f8f5f37b1df",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b9d88b54-05f4-4ac9-b5c6-ba99de89b829",
+              "name": "=name",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "85c6b4f9-1206-41a9-ab76-961600e008cf",
+              "name": "email",
+              "value": "={{ $json.email }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        272,
+        -16
+      ],
+      "id": "85106606-614c-4e11-899e-221f6ce4d362",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "2ef1dc02-37ca-4c06-ac42-19562835f178",
+  "nodeGroups": [],
+  "id": "dfpLA00Iv7mAk2pJ",
+  "tags": []
+}

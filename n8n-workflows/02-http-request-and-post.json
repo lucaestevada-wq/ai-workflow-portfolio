@@ -1,0 +1,138 @@
+{
+  "name": "test 2 requests",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -224,
+        -16
+      ],
+      "id": "96a1f32c-e0aa-4eaa-b82c-1a9b5412aa44",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://api.open-meteo.com/v1/forecast?latitude=41.39&longitude=2.17&current_weather=true",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        0,
+        -16
+      ],
+      "id": "98818da9-9756-4362-90c2-5a3d1703e989",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4efe3742-2c27-4a68-910e-3b18de7867a9",
+              "name": "city",
+              "value": "Barcelona",
+              "type": "string"
+            },
+            {
+              "id": "b042ad76-c06f-4078-ab15-ee9b1898a5a5",
+              "name": "temp",
+              "value": "={{ $json.current_weather.temperature }}",
+              "type": "string"
+            },
+            {
+              "id": "e160625c-321a-413d-8508-c17d625e7353",
+              "name": "message",
+              "value": "=It is {{ $json.current_weather.temperature }} degrees in Barcelona right now",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        224,
+        -16
+      ],
+      "id": "45af2c35-b6b3-4a7a-a64e-1dc246e38584",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://jsonplaceholder.typicode.com/posts",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "=city",
+              "value": "={{ $json.city }}"
+            },
+            {
+              "name": "=temp",
+              "value": "={{ $json.temp }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        448,
+        -16
+      ],
+      "id": "55aaf241-6e78-4511-b574-038a8c24ac89",
+      "name": "HTTP Request1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "b3767a76-2bb1-4580-97ac-5f1ea632ff76",
+  "nodeGroups": [],
+  "id": "12Cb4LFIhTBXemC6",
+  "tags": []
+}
