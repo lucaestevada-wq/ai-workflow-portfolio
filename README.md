@@ -25,14 +25,20 @@ Production Discord bot delivering AI-powered art critique grounded in a 300+ boo
 ### 3. Remotion Motion Graphics Pipeline *(coming soon)*
 Code-based motion graphics using React/Remotion. Programmatic animation, brand-consistent asset generation.
 
-### 4. [n8n Fundamentals Workflows](./n8n-workflows/)
+### 4. [n8n Gmail Triage](./n8n-gmail-triage/)
+LLM-powered email routing with human approval gate. Gmail trigger → Claude Haiku (structured JSON output) → category/urgency/summary/draft reply → Google Sheets log → human approval before send. Spam branch skips draft creation entirely.
+
+Key finding: Claude hallucinated fake prices, policies and attachment names in v1.0 drafts — making the approval gate the actual product value, not a formality. Prompt v1.1 eliminates hallucinations with an explicit rules block. 14/15 accuracy on category and urgency. ~$0.0001/email.
+
+**Proves**: structured LLM output, prompt engineering for hallucination prevention, human-in-the-loop pattern, branching logic, multi-destination output (Sheets + Gmail).
+
+### 5. [n8n Fundamentals Workflows](./n8n-workflows/)
 Four importable workflows: webhook in/out, HTTP GET and POST, JSON lists, and a capstone that takes a POSTed name, calls a weather API and replies with a personalised sentence. Self-hosted n8n in Docker, no credentials.
 
-**Proves**: n8n core nodes, webhooks, REST calls, JSON and expressions. Fundamentals only, error handling and LLM steps come next.
+**Proves**: n8n core nodes, webhooks, REST calls, JSON and expressions.
 
 ---
 
 ## In Progress
-- n8n automation workflows (Phase 1): fundamentals done, Gmail triage with LLM next
 - Content repurposing pipeline: video → transcript → shorts (Phase 2)
-- Business ops automation: email triage → CRM → human review loop (Phase 3)
+- Business ops automation: CRM update, meeting scheduling (Phase 3)
